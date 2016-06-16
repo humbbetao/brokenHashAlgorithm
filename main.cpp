@@ -11,6 +11,15 @@
 #include <fstream>
 using namespace std;
 
+
+std::string sconvert(const char *pCh, int arraySize){
+  std::string str;
+  if (pCh[arraySize-1] == '\0') str.append(pCh);
+  else for(int i=0; i<arraySize; i++) str.append(1,pCh[i]);
+  return str;
+}
+
+
 int main(int argc, char *argv[])
 {
     string senha = "99999";
@@ -44,40 +53,41 @@ int main(int argc, char *argv[])
 
     ifstream myfile ("hashesorg251015.txt");
 
-    if (myfile.is_open())
-    {
-        while (! myfile.eof() ){ //enquanto end of file for false continua
-                getline (myfile,line); // como foi aberto em modo texto(padrão) e não binário(ios::bin) pega cada linha
-                cout << line << endl;
-            }
-        myfile.close();
-    }
-    else cout << "Unable to open file";
+    ifstream is("wordLists/facebook-names-unique.txt");
+    char buf[10*1024];
+    int j=0;
+    int k=0;
+    char buffer[500];
+    string nova;
 
-
-   while(true)
-    {
+   while(true)  {
         i++;
         chave++;
-        resultado<<i;
-        chaveGerada = md5(resultado.str());
-        resultado.str("");
-        resultado.clear();
-        if(chaveGerada==saidaDoMd5)
-        {
-            cout<<"quebrou"<<endl;
-            break;
-        }
-        cout<<"Testando "<< i<<" ChaveGerada "<<chaveGerada<<"\n"<<endl;
+        
+	while(is) {
+		is.read(buf, sizeof(buf));
+		//cout<<"FOI"<<endl;		
+		for(k=0; j<10*1024; j+=1, k++){
+			buffer[k]= buf[j];
+			//cout<<"kkkkk"<<endl;
+			if(buf[j]=='\n'){
+				nova = sconvert(buffer, k);
+				chaveGerada = md5(nova);
+				if(chaveGerada==saidaDoMd5)
+				{
+				    cout<<"quebrou"<<endl;
+				    break;
+				}
+				cout<<"Testando "<< nova <<" ChaveGerada "<<chaveGerada<<"\n"<<endl;
+				k=0;
+			 	//cout<<"FOI"<<endl;
+			}
+		}
+		j=0;
+		cout<<endl;	
+	} 
     }
 
     return 0;
 }
 
-
-
-string testarDictionary(string nomeDoArquivo)
-{
-
-
-}
