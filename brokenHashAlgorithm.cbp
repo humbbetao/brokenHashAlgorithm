@@ -34,13 +34,18 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="filemap.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="md5.cpp" />
 		<Unit filename="md5.h" />
+		<Unit filename="readFile.cpp" />
 		<Unit filename="sha1.cpp" />
 		<Unit filename="sha1.h" />
 		<Unit filename="sha256.cpp" />
 		<Unit filename="sha256.h" />
+		<Unit filename="swap.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

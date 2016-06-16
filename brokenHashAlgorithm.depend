@@ -7,7 +7,7 @@
 1465778350 c:\users\humbe\documents\brokenhashalgorithm\sha256.h
 	<string>
 
-1465836482 source:c:\users\humbe\documents\brokenhashalgorithm\main.cpp
+1466054200 source:c:\users\humbe\documents\brokenhashalgorithm\main.cpp
 	<iostream>
 	"sha1.h"
 	"sha256.h"
@@ -37,4 +37,11 @@
 1465780468 c:\users\humbe\documents\brokenhashalgorithm\md5.h
 	<cstring>
 	<iostream>
+
+1466054225 source:c:\users\humbe\documents\brokenhashalgorithm\swap.cpp
+	<iostream>
+
+1466054152 source:c:\users\humbe\documents\brokenhashalgorithm\readfile.cpp
+	<stdio.h>
+	<unistd.h>
 

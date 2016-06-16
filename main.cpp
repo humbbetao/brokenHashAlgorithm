@@ -29,7 +29,20 @@ int main(int argc, char *argv[])
     string chaveGerada;
     stringstream resultado;
     string line;
-    ifstream myfile ("dictionary_brazilian.dic");
+    // test com dictionary
+    string fileTest1("passwords.txt");
+    string fileTest2("500-worst-passwords.txt");
+    string fileTest3("cain.txt");
+    string fileTest4("common-passwords.txt");
+    string fileTest5("cracklib.txt");
+    string fileTest6("facebook-first.l-withcount.txt");
+    string fileTest7("english.txt");
+    string fileTest8("rockyou.txt");
+    string fileTest9("tbswordlist2.txt");
+    string fileTest10("dic-0294.txt");
+
+
+    ifstream myfile ("hashesorg251015.txt");
 
     if (myfile.is_open())
     {
@@ -42,7 +55,7 @@ int main(int argc, char *argv[])
     else cout << "Unable to open file";
 
 
-    while(true)
+   while(true)
     {
         i++;
         chave++;
@@ -63,3 +76,8 @@ int main(int argc, char *argv[])
 
 
 
+string testarDictionary(string nomeDoArquivo)
+{
+
+
+}
