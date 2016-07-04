@@ -12,7 +12,27 @@
 using namespace std;
 #define MAX 250
 
+<<<<<<< HEAD
 int main() {
+=======
+
+std::string sconvert(const char *pCh, int arraySize){
+  std::string str;
+  if (pCh[arraySize-1] == '\0') str.append(pCh);
+  else for(int i=0; i<arraySize; i++) str.append(1,pCh[i]);
+  return str;
+}
+
+
+int main(int argc, char *argv[])
+{
+    string senha = "99999";
+    string nomeDoArquivoDeWordListPortuguese = "dictionary_brazilian.dic";
+    string nomeDoArquivoDeWordListEnglish = "dictionary_english.dic";
+    string saidaDoMd5 = md5(senha);
+    string saidaDoSha1 =sha1(senha);
+    string saidaDoSha256 = sha256(senha);
+>>>>>>> e2417fc92584d6d8ff6b327935bbd25452a38149
 
     string senhaTeste1 = "99999";
     string senhaTeste2 = "banana";
@@ -23,6 +43,7 @@ int main() {
     int chave = 1;
     string chaveGerada;
     stringstream resultado;
+<<<<<<< HEAD
     char input[MAX] = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLMNBVCXZ1234567890_-";
     char str[MAX];
     int n, r, i, j, k;
@@ -68,9 +89,62 @@ int main() {
                     /* Mostra o resultado. */
                     str[r] = 0;
                     chaveGerada = md5(str);
+=======
+    string line;
+    // test com dictionary
+    string fileTest1("passwords.txt");
+    string fileTest2("500-worst-passwords.txt");
+    string fileTest3("cain.txt");
+    string fileTest4("common-passwords.txt");
+    string fileTest5("cracklib.txt");
+    string fileTest6("facebook-first.l-withcount.txt");
+    string fileTest7("english.txt");
+    string fileTest8("rockyou.txt");
+    string fileTest9("tbswordlist2.txt");
+    string fileTest10("dic-0294.txt");
+
+
+    ifstream myfile ("hashesorg251015.txt");
+
+    ifstream is("wordLists/facebook-names-unique.txt");
+    char buf[10*1024];
+    int j=0;
+    int k=0;
+    char buffer[500];
+    string nova;
+
+   while(true)  {
+        i++;
+        chave++;
+        
+	while(is) {
+		is.read(buf, sizeof(buf));
+		//cout<<"FOI"<<endl;		
+		for(k=0; j<10*1024; j+=1, k++){
+			buffer[k]= buf[j];
+			//cout<<"kkkkk"<<endl;
+			if(buf[j]=='\n'){
+				nova = sconvert(buffer, k);
+				chaveGerada = md5(nova);
+				if(chaveGerada==saidaDoMd5)
+				{
+				    cout<<"quebrou"<<endl;
+				    break;
+				}
+				cout<<"Testando "<< nova <<" ChaveGerada "<<chaveGerada<<"\n"<<endl;
+				k=0;
+			 	//cout<<"FOI"<<endl;
+			}
+		}
+		j=0;
+		cout<<endl;	
+	} 
+    }
+>>>>>>> e2417fc92584d6d8ff6b327935bbd25452a38149
 
                     cout << "Testando " << str << " ChaveGerada " << chaveGerada << "\n" << endl;
 
+<<<<<<< HEAD
                     /* incrementa o algarismo menos significativo. */
                     num[0]++;
                 }
@@ -93,3 +167,5 @@ int main() {
 
     return 0;
 }
+=======
+>>>>>>> e2417fc92584d6d8ff6b327935bbd25452a38149
