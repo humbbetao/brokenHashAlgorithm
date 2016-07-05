@@ -9,13 +9,12 @@
 #include <fstream>
 using namespace std;
 #define MAX 250
-
 #define OMP_STACKSIZE = "3G"
 
 int main(int argc, char *argv[]){
 
 
-    string senhaTeste1 = "99999";
+    string senhaTeste1 = "abcd";
     string senhaTeste2 = "banana";
     string senhaTeste3 = "qwertyuiop";
     string saidaDoMd5 = md5(senhaTeste1);
@@ -27,10 +26,14 @@ int main(int argc, char *argv[]){
     int n, r, i, j, k;
     int h=0;
 	int b=0;
-	#pragma omp parallel for schedule(dynamic,100) num_threads(2)
-	for(b=0; b<8; b++){
+	int quebrou =0; 
+	bool abort = false;
+	#pragma omp parallel for schedule(dynamic,100) num_threads(4)
+	
+	for(b=0; b<16; b++){
+		
 
-        for (h = 0; h<1; h++) {
+        for (h = 0; h<1 ; h++) {
             int *num;
             r = b;
             n = strlen(input);
@@ -46,15 +49,9 @@ int main(int argc, char *argv[]){
             strcpy(input, str);
             n = strlen(input);
 
-            /* Cria o nosso número. Ele é um vetor de
-             * r+1 posições, sendo que a última é
-             * reservada para indicar quando todos os
-             * números de tamanho r foram gerados. */
+            // Cria o nosso número. Ele é um vetor de
+            // r+1 posições,
             num = (int *) calloc((r + 1), sizeof (int));
-            //if (num == NULL) {
-              //  perror("calloc");
-              //  return -1;
-            //}
 
             /* Termina quando a última posição do vetor
              * for 1. */
@@ -66,20 +63,25 @@ int main(int argc, char *argv[]){
                         str[k] = input[num[j]];
                         k--;
                     }
-                    /* Mostra o resultado. */
+
+
                     str[r] = 0;
-                    chaveGerada = md5(str);
+                    chaveGerada = md5(str);//gera a chave
 
-
+			//testa a chave
                     cout << "Testando " << str << " ChaveGerada " << chaveGerada << "\n" << endl;
 			if (chaveGerada == saidaDoMd5) {
 			    cout << "quebrou" << endl;
+				quebrou++;
+				break;
+
 			}
                     /* incrementa o algarismo menos significativo. */
                     num[0]++;
                 }
+		if(quebrou>0){
+		break;		
 
-                /* Muda de "casa" e lança os vai uns. */
                 for (i = 0; i < r; i++) {
                     if (num[i] == n) {
                         num[i] = 0;
@@ -89,6 +91,9 @@ int main(int argc, char *argv[]){
             }
 
         }
-	}
+
+	
+}
+
     return 0;
 }
